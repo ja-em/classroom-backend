@@ -50,6 +50,15 @@ export class AuthenticationService {
     }
   }
 
+  verfiyAccessToken(accessToken: string): boolean {
+    try {
+      jwt.verify(accessToken, this._accessTokenSecret);
+      return true;
+    } catch (e) {
+      return false;
+    }
+  }
+
   private _generateAccessToken(username: string): string {
     const accessToken = jwt.sign({ username }, this._accessTokenSecret, {
       expiresIn: this._accessTokenExpiration,

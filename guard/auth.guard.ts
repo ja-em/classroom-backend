@@ -7,11 +7,16 @@ export class AuthGuard implements CanActivate {
   constructor(private readonly _authService: AuthenticationService) {}
   canActivate(context: ExecutionContext): boolean {
     const ctx = GqlExecutionContext.create(context);
-    const req = ctx.getContext()?.req;
-    console.log('Request:', req);
-    // console.log('AC', this._authService.generateAccessToken());
+    const headers = ctx.getContext()?.req?.headers;
+    if (!headers) {
+      return false;
+    }
 
-    // You can implement JWT validation or session check here
-    return true;
+    const accessToken = headers['authorization']?.split(' ')[1];
+    if (!accessToken) {
+      return false;
+    }
+
+    return this._authService.verfiyAccessToken(accessToken);
   }
 }
