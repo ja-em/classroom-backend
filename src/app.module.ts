@@ -3,10 +3,11 @@ import { Global, Module } from '@nestjs/common';
 import { GraphQLModule } from '@nestjs/graphql';
 import { StudentModule } from './student/student.module';
 import { AuthenticationModule } from './authentication/authentication.module';
+import { ConfigModule } from '@nestjs/config';
 
 @Global()
 @Module({
-  imports: [AuthenticationModule],
+  imports: [AuthenticationModule, ConfigModule.forRoot({ isGlobal: true })],
   exports: [AuthenticationModule],
 })
 class GlobalModule {}
