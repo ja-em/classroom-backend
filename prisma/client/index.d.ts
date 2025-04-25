@@ -1303,6 +1303,37 @@ export namespace Prisma {
 
 
   /**
+   * Count Type TeacherCountOutputType
+   */
+
+  export type TeacherCountOutputType = {
+    homeRooms: number
+  }
+
+  export type TeacherCountOutputTypeSelect<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    homeRooms?: boolean | TeacherCountOutputTypeCountHomeRoomsArgs
+  }
+
+  // Custom InputTypes
+  /**
+   * TeacherCountOutputType without action
+   */
+  export type TeacherCountOutputTypeDefaultArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the TeacherCountOutputType
+     */
+    select?: TeacherCountOutputTypeSelect<ExtArgs> | null
+  }
+
+  /**
+   * TeacherCountOutputType without action
+   */
+  export type TeacherCountOutputTypeCountHomeRoomsArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    where?: HomeroomTeacherWhereInput
+  }
+
+
+  /**
    * Count Type ClassroomCountOutputType
    */
 
@@ -3564,6 +3595,8 @@ export namespace Prisma {
     email?: boolean
     createdAt?: boolean
     updatedAt?: boolean
+    homeRooms?: boolean | Teacher$homeRoomsArgs<ExtArgs>
+    _count?: boolean | TeacherCountOutputTypeDefaultArgs<ExtArgs>
   }, ExtArgs["result"]["teacher"]>
 
 
@@ -3578,10 +3611,16 @@ export namespace Prisma {
   }
 
   export type TeacherOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "firstName" | "lastName" | "email" | "createdAt" | "updatedAt", ExtArgs["result"]["teacher"]>
+  export type TeacherInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    homeRooms?: boolean | Teacher$homeRoomsArgs<ExtArgs>
+    _count?: boolean | TeacherCountOutputTypeDefaultArgs<ExtArgs>
+  }
 
   export type $TeacherPayload<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     name: "Teacher"
-    objects: {}
+    objects: {
+      homeRooms: Prisma.$HomeroomTeacherPayload<ExtArgs>[]
+    }
     scalars: $Extensions.GetPayloadResult<{
       id: number
       firstName: string
@@ -3929,6 +3968,7 @@ export namespace Prisma {
    */
   export interface Prisma__TeacherClient<T, Null = never, ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, GlobalOmitOptions = {}> extends Prisma.PrismaPromise<T> {
     readonly [Symbol.toStringTag]: "PrismaPromise"
+    homeRooms<T extends Teacher$homeRoomsArgs<ExtArgs> = {}>(args?: Subset<T, Teacher$homeRoomsArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$HomeroomTeacherPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
     /**
      * Attaches callbacks for the resolution and/or rejection of the Promise.
      * @param onfulfilled The callback to execute when the Promise is resolved.
@@ -3981,6 +4021,10 @@ export namespace Prisma {
      */
     omit?: TeacherOmit<ExtArgs> | null
     /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: TeacherInclude<ExtArgs> | null
+    /**
      * Filter, which Teacher to fetch.
      */
     where: TeacherWhereUniqueInput
@@ -3999,6 +4043,10 @@ export namespace Prisma {
      */
     omit?: TeacherOmit<ExtArgs> | null
     /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: TeacherInclude<ExtArgs> | null
+    /**
      * Filter, which Teacher to fetch.
      */
     where: TeacherWhereUniqueInput
@@ -4016,6 +4064,10 @@ export namespace Prisma {
      * Omit specific fields from the Teacher
      */
     omit?: TeacherOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: TeacherInclude<ExtArgs> | null
     /**
      * Filter, which Teacher to fetch.
      */
@@ -4065,6 +4117,10 @@ export namespace Prisma {
      */
     omit?: TeacherOmit<ExtArgs> | null
     /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: TeacherInclude<ExtArgs> | null
+    /**
      * Filter, which Teacher to fetch.
      */
     where?: TeacherWhereInput
@@ -4113,6 +4169,10 @@ export namespace Prisma {
      */
     omit?: TeacherOmit<ExtArgs> | null
     /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: TeacherInclude<ExtArgs> | null
+    /**
      * Filter, which Teachers to fetch.
      */
     where?: TeacherWhereInput
@@ -4156,6 +4216,10 @@ export namespace Prisma {
      */
     omit?: TeacherOmit<ExtArgs> | null
     /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: TeacherInclude<ExtArgs> | null
+    /**
      * The data needed to create a Teacher.
      */
     data: XOR<TeacherCreateInput, TeacherUncheckedCreateInput>
@@ -4184,6 +4248,10 @@ export namespace Prisma {
      * Omit specific fields from the Teacher
      */
     omit?: TeacherOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: TeacherInclude<ExtArgs> | null
     /**
      * The data needed to update a Teacher.
      */
@@ -4225,6 +4293,10 @@ export namespace Prisma {
      */
     omit?: TeacherOmit<ExtArgs> | null
     /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: TeacherInclude<ExtArgs> | null
+    /**
      * The filter to search for the Teacher to update in case it exists.
      */
     where: TeacherWhereUniqueInput
@@ -4251,6 +4323,10 @@ export namespace Prisma {
      */
     omit?: TeacherOmit<ExtArgs> | null
     /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: TeacherInclude<ExtArgs> | null
+    /**
      * Filter which Teacher to delete.
      */
     where: TeacherWhereUniqueInput
@@ -4271,6 +4347,30 @@ export namespace Prisma {
   }
 
   /**
+   * Teacher.homeRooms
+   */
+  export type Teacher$homeRoomsArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the HomeroomTeacher
+     */
+    select?: HomeroomTeacherSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the HomeroomTeacher
+     */
+    omit?: HomeroomTeacherOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: HomeroomTeacherInclude<ExtArgs> | null
+    where?: HomeroomTeacherWhereInput
+    orderBy?: HomeroomTeacherOrderByWithRelationInput | HomeroomTeacherOrderByWithRelationInput[]
+    cursor?: HomeroomTeacherWhereUniqueInput
+    take?: number
+    skip?: number
+    distinct?: HomeroomTeacherScalarFieldEnum | HomeroomTeacherScalarFieldEnum[]
+  }
+
+  /**
    * Teacher without action
    */
   export type TeacherDefaultArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
@@ -4282,6 +4382,10 @@ export namespace Prisma {
      * Omit specific fields from the Teacher
      */
     omit?: TeacherOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: TeacherInclude<ExtArgs> | null
   }
 
 
@@ -6303,16 +6407,19 @@ export namespace Prisma {
   export type HomeroomTeacherAvgAggregateOutputType = {
     id: number | null
     classroomId: number | null
+    teacherId: number | null
   }
 
   export type HomeroomTeacherSumAggregateOutputType = {
     id: number | null
     classroomId: number | null
+    teacherId: number | null
   }
 
   export type HomeroomTeacherMinAggregateOutputType = {
     id: number | null
     classroomId: number | null
+    teacherId: number | null
     createdAt: Date | null
     updatedAt: Date | null
   }
@@ -6320,6 +6427,7 @@ export namespace Prisma {
   export type HomeroomTeacherMaxAggregateOutputType = {
     id: number | null
     classroomId: number | null
+    teacherId: number | null
     createdAt: Date | null
     updatedAt: Date | null
   }
@@ -6327,6 +6435,7 @@ export namespace Prisma {
   export type HomeroomTeacherCountAggregateOutputType = {
     id: number
     classroomId: number
+    teacherId: number
     createdAt: number
     updatedAt: number
     _all: number
@@ -6336,16 +6445,19 @@ export namespace Prisma {
   export type HomeroomTeacherAvgAggregateInputType = {
     id?: true
     classroomId?: true
+    teacherId?: true
   }
 
   export type HomeroomTeacherSumAggregateInputType = {
     id?: true
     classroomId?: true
+    teacherId?: true
   }
 
   export type HomeroomTeacherMinAggregateInputType = {
     id?: true
     classroomId?: true
+    teacherId?: true
     createdAt?: true
     updatedAt?: true
   }
@@ -6353,6 +6465,7 @@ export namespace Prisma {
   export type HomeroomTeacherMaxAggregateInputType = {
     id?: true
     classroomId?: true
+    teacherId?: true
     createdAt?: true
     updatedAt?: true
   }
@@ -6360,6 +6473,7 @@ export namespace Prisma {
   export type HomeroomTeacherCountAggregateInputType = {
     id?: true
     classroomId?: true
+    teacherId?: true
     createdAt?: true
     updatedAt?: true
     _all?: true
@@ -6454,6 +6568,7 @@ export namespace Prisma {
   export type HomeroomTeacherGroupByOutputType = {
     id: number
     classroomId: number
+    teacherId: number
     createdAt: Date
     updatedAt: Date
     _count: HomeroomTeacherCountAggregateOutputType | null
@@ -6480,9 +6595,11 @@ export namespace Prisma {
   export type HomeroomTeacherSelect<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
     id?: boolean
     classroomId?: boolean
+    teacherId?: boolean
     createdAt?: boolean
     updatedAt?: boolean
     classroom?: boolean | ClassroomDefaultArgs<ExtArgs>
+    teacher?: boolean | TeacherDefaultArgs<ExtArgs>
   }, ExtArgs["result"]["homeroomTeacher"]>
 
 
@@ -6490,23 +6607,27 @@ export namespace Prisma {
   export type HomeroomTeacherSelectScalar = {
     id?: boolean
     classroomId?: boolean
+    teacherId?: boolean
     createdAt?: boolean
     updatedAt?: boolean
   }
 
-  export type HomeroomTeacherOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "classroomId" | "createdAt" | "updatedAt", ExtArgs["result"]["homeroomTeacher"]>
+  export type HomeroomTeacherOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "classroomId" | "teacherId" | "createdAt" | "updatedAt", ExtArgs["result"]["homeroomTeacher"]>
   export type HomeroomTeacherInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     classroom?: boolean | ClassroomDefaultArgs<ExtArgs>
+    teacher?: boolean | TeacherDefaultArgs<ExtArgs>
   }
 
   export type $HomeroomTeacherPayload<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     name: "HomeroomTeacher"
     objects: {
       classroom: Prisma.$ClassroomPayload<ExtArgs>
+      teacher: Prisma.$TeacherPayload<ExtArgs>
     }
     scalars: $Extensions.GetPayloadResult<{
       id: number
       classroomId: number
+      teacherId: number
       createdAt: Date
       updatedAt: Date
     }, ExtArgs["result"]["homeroomTeacher"]>
@@ -6850,6 +6971,7 @@ export namespace Prisma {
   export interface Prisma__HomeroomTeacherClient<T, Null = never, ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, GlobalOmitOptions = {}> extends Prisma.PrismaPromise<T> {
     readonly [Symbol.toStringTag]: "PrismaPromise"
     classroom<T extends ClassroomDefaultArgs<ExtArgs> = {}>(args?: Subset<T, ClassroomDefaultArgs<ExtArgs>>): Prisma__ClassroomClient<$Result.GetResult<Prisma.$ClassroomPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
+    teacher<T extends TeacherDefaultArgs<ExtArgs> = {}>(args?: Subset<T, TeacherDefaultArgs<ExtArgs>>): Prisma__TeacherClient<$Result.GetResult<Prisma.$TeacherPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
     /**
      * Attaches callbacks for the resolution and/or rejection of the Promise.
      * @param onfulfilled The callback to execute when the Promise is resolved.
@@ -6881,6 +7003,7 @@ export namespace Prisma {
   interface HomeroomTeacherFieldRefs {
     readonly id: FieldRef<"HomeroomTeacher", 'Int'>
     readonly classroomId: FieldRef<"HomeroomTeacher", 'Int'>
+    readonly teacherId: FieldRef<"HomeroomTeacher", 'Int'>
     readonly createdAt: FieldRef<"HomeroomTeacher", 'DateTime'>
     readonly updatedAt: FieldRef<"HomeroomTeacher", 'DateTime'>
   }
@@ -7321,6 +7444,7 @@ export namespace Prisma {
   export const HomeroomTeacherScalarFieldEnum: {
     id: 'id',
     classroomId: 'classroomId',
+    teacherId: 'teacherId',
     createdAt: 'createdAt',
     updatedAt: 'updatedAt'
   };
@@ -7551,6 +7675,7 @@ export namespace Prisma {
     email?: StringFilter<"Teacher"> | string
     createdAt?: DateTimeFilter<"Teacher"> | Date | string
     updatedAt?: DateTimeFilter<"Teacher"> | Date | string
+    homeRooms?: HomeroomTeacherListRelationFilter
   }
 
   export type TeacherOrderByWithRelationInput = {
@@ -7560,6 +7685,7 @@ export namespace Prisma {
     email?: SortOrder
     createdAt?: SortOrder
     updatedAt?: SortOrder
+    homeRooms?: HomeroomTeacherOrderByRelationAggregateInput
     _relevance?: TeacherOrderByRelevanceInput
   }
 
@@ -7573,6 +7699,7 @@ export namespace Prisma {
     lastName?: StringFilter<"Teacher"> | string
     createdAt?: DateTimeFilter<"Teacher"> | Date | string
     updatedAt?: DateTimeFilter<"Teacher"> | Date | string
+    homeRooms?: HomeroomTeacherListRelationFilter
   }, "id" | "email">
 
   export type TeacherOrderByWithAggregationInput = {
@@ -7693,6 +7820,7 @@ export namespace Prisma {
   export type EnrollmentWhereUniqueInput = Prisma.AtLeast<{
     id?: number
     studentId?: number
+    classroomId_studentId?: EnrollmentClassroomIdStudentIdCompoundUniqueInput
     AND?: EnrollmentWhereInput | EnrollmentWhereInput[]
     OR?: EnrollmentWhereInput[]
     NOT?: EnrollmentWhereInput | EnrollmentWhereInput[]
@@ -7701,7 +7829,7 @@ export namespace Prisma {
     updatedAt?: DateTimeFilter<"Enrollment"> | Date | string
     classroom?: XOR<ClassroomScalarRelationFilter, ClassroomWhereInput>
     student?: XOR<StudentScalarRelationFilter, StudentWhereInput>
-  }, "id" | "studentId">
+  }, "id" | "studentId" | "classroomId_studentId">
 
   export type EnrollmentOrderByWithAggregationInput = {
     id?: SortOrder
@@ -7733,33 +7861,41 @@ export namespace Prisma {
     NOT?: HomeroomTeacherWhereInput | HomeroomTeacherWhereInput[]
     id?: IntFilter<"HomeroomTeacher"> | number
     classroomId?: IntFilter<"HomeroomTeacher"> | number
+    teacherId?: IntFilter<"HomeroomTeacher"> | number
     createdAt?: DateTimeFilter<"HomeroomTeacher"> | Date | string
     updatedAt?: DateTimeFilter<"HomeroomTeacher"> | Date | string
     classroom?: XOR<ClassroomScalarRelationFilter, ClassroomWhereInput>
+    teacher?: XOR<TeacherScalarRelationFilter, TeacherWhereInput>
   }
 
   export type HomeroomTeacherOrderByWithRelationInput = {
     id?: SortOrder
     classroomId?: SortOrder
+    teacherId?: SortOrder
     createdAt?: SortOrder
     updatedAt?: SortOrder
     classroom?: ClassroomOrderByWithRelationInput
+    teacher?: TeacherOrderByWithRelationInput
   }
 
   export type HomeroomTeacherWhereUniqueInput = Prisma.AtLeast<{
     id?: number
+    classroomId_teacherId?: HomeroomTeacherClassroomIdTeacherIdCompoundUniqueInput
     AND?: HomeroomTeacherWhereInput | HomeroomTeacherWhereInput[]
     OR?: HomeroomTeacherWhereInput[]
     NOT?: HomeroomTeacherWhereInput | HomeroomTeacherWhereInput[]
     classroomId?: IntFilter<"HomeroomTeacher"> | number
+    teacherId?: IntFilter<"HomeroomTeacher"> | number
     createdAt?: DateTimeFilter<"HomeroomTeacher"> | Date | string
     updatedAt?: DateTimeFilter<"HomeroomTeacher"> | Date | string
     classroom?: XOR<ClassroomScalarRelationFilter, ClassroomWhereInput>
-  }, "id">
+    teacher?: XOR<TeacherScalarRelationFilter, TeacherWhereInput>
+  }, "id" | "classroomId_teacherId">
 
   export type HomeroomTeacherOrderByWithAggregationInput = {
     id?: SortOrder
     classroomId?: SortOrder
+    teacherId?: SortOrder
     createdAt?: SortOrder
     updatedAt?: SortOrder
     _count?: HomeroomTeacherCountOrderByAggregateInput
@@ -7775,6 +7911,7 @@ export namespace Prisma {
     NOT?: HomeroomTeacherScalarWhereWithAggregatesInput | HomeroomTeacherScalarWhereWithAggregatesInput[]
     id?: IntWithAggregatesFilter<"HomeroomTeacher"> | number
     classroomId?: IntWithAggregatesFilter<"HomeroomTeacher"> | number
+    teacherId?: IntWithAggregatesFilter<"HomeroomTeacher"> | number
     createdAt?: DateTimeWithAggregatesFilter<"HomeroomTeacher"> | Date | string
     updatedAt?: DateTimeWithAggregatesFilter<"HomeroomTeacher"> | Date | string
   }
@@ -7919,6 +8056,7 @@ export namespace Prisma {
     email: string
     createdAt?: Date | string
     updatedAt?: Date | string
+    homeRooms?: HomeroomTeacherCreateNestedManyWithoutTeacherInput
   }
 
   export type TeacherUncheckedCreateInput = {
@@ -7928,6 +8066,7 @@ export namespace Prisma {
     email: string
     createdAt?: Date | string
     updatedAt?: Date | string
+    homeRooms?: HomeroomTeacherUncheckedCreateNestedManyWithoutTeacherInput
   }
 
   export type TeacherUpdateInput = {
@@ -7936,6 +8075,7 @@ export namespace Prisma {
     email?: StringFieldUpdateOperationsInput | string
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    homeRooms?: HomeroomTeacherUpdateManyWithoutTeacherNestedInput
   }
 
   export type TeacherUncheckedUpdateInput = {
@@ -7945,6 +8085,7 @@ export namespace Prisma {
     email?: StringFieldUpdateOperationsInput | string
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    homeRooms?: HomeroomTeacherUncheckedUpdateManyWithoutTeacherNestedInput
   }
 
   export type TeacherCreateManyInput = {
@@ -8096,11 +8237,13 @@ export namespace Prisma {
     createdAt?: Date | string
     updatedAt?: Date | string
     classroom: ClassroomCreateNestedOneWithoutHomeroomTeachersInput
+    teacher: TeacherCreateNestedOneWithoutHomeRoomsInput
   }
 
   export type HomeroomTeacherUncheckedCreateInput = {
     id?: number
     classroomId: number
+    teacherId: number
     createdAt?: Date | string
     updatedAt?: Date | string
   }
@@ -8109,11 +8252,13 @@ export namespace Prisma {
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     classroom?: ClassroomUpdateOneRequiredWithoutHomeroomTeachersNestedInput
+    teacher?: TeacherUpdateOneRequiredWithoutHomeRoomsNestedInput
   }
 
   export type HomeroomTeacherUncheckedUpdateInput = {
     id?: IntFieldUpdateOperationsInput | number
     classroomId?: IntFieldUpdateOperationsInput | number
+    teacherId?: IntFieldUpdateOperationsInput | number
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
   }
@@ -8121,6 +8266,7 @@ export namespace Prisma {
   export type HomeroomTeacherCreateManyInput = {
     id?: number
     classroomId: number
+    teacherId: number
     createdAt?: Date | string
     updatedAt?: Date | string
   }
@@ -8133,6 +8279,7 @@ export namespace Prisma {
   export type HomeroomTeacherUncheckedUpdateManyInput = {
     id?: IntFieldUpdateOperationsInput | number
     classroomId?: IntFieldUpdateOperationsInput | number
+    teacherId?: IntFieldUpdateOperationsInput | number
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
   }
@@ -8329,6 +8476,16 @@ export namespace Prisma {
     classLevelId?: SortOrder
   }
 
+  export type HomeroomTeacherListRelationFilter = {
+    every?: HomeroomTeacherWhereInput
+    some?: HomeroomTeacherWhereInput
+    none?: HomeroomTeacherWhereInput
+  }
+
+  export type HomeroomTeacherOrderByRelationAggregateInput = {
+    _count?: SortOrder
+  }
+
   export type TeacherOrderByRelevanceInput = {
     fields: TeacherOrderByRelevanceFieldEnum | TeacherOrderByRelevanceFieldEnum[]
     sort: SortOrder
@@ -8376,17 +8533,7 @@ export namespace Prisma {
     none?: EnrollmentWhereInput
   }
 
-  export type HomeroomTeacherListRelationFilter = {
-    every?: HomeroomTeacherWhereInput
-    some?: HomeroomTeacherWhereInput
-    none?: HomeroomTeacherWhereInput
-  }
-
   export type EnrollmentOrderByRelationAggregateInput = {
-    _count?: SortOrder
-  }
-
-  export type HomeroomTeacherOrderByRelationAggregateInput = {
     _count?: SortOrder
   }
 
@@ -8441,6 +8588,11 @@ export namespace Prisma {
     isNot?: StudentWhereInput
   }
 
+  export type EnrollmentClassroomIdStudentIdCompoundUniqueInput = {
+    classroomId: number
+    studentId: number
+  }
+
   export type EnrollmentCountOrderByAggregateInput = {
     id?: SortOrder
     classroomId?: SortOrder
@@ -8477,9 +8629,20 @@ export namespace Prisma {
     studentId?: SortOrder
   }
 
+  export type TeacherScalarRelationFilter = {
+    is?: TeacherWhereInput
+    isNot?: TeacherWhereInput
+  }
+
+  export type HomeroomTeacherClassroomIdTeacherIdCompoundUniqueInput = {
+    classroomId: number
+    teacherId: number
+  }
+
   export type HomeroomTeacherCountOrderByAggregateInput = {
     id?: SortOrder
     classroomId?: SortOrder
+    teacherId?: SortOrder
     createdAt?: SortOrder
     updatedAt?: SortOrder
   }
@@ -8487,11 +8650,13 @@ export namespace Prisma {
   export type HomeroomTeacherAvgOrderByAggregateInput = {
     id?: SortOrder
     classroomId?: SortOrder
+    teacherId?: SortOrder
   }
 
   export type HomeroomTeacherMaxOrderByAggregateInput = {
     id?: SortOrder
     classroomId?: SortOrder
+    teacherId?: SortOrder
     createdAt?: SortOrder
     updatedAt?: SortOrder
   }
@@ -8499,6 +8664,7 @@ export namespace Prisma {
   export type HomeroomTeacherMinOrderByAggregateInput = {
     id?: SortOrder
     classroomId?: SortOrder
+    teacherId?: SortOrder
     createdAt?: SortOrder
     updatedAt?: SortOrder
   }
@@ -8506,6 +8672,7 @@ export namespace Prisma {
   export type HomeroomTeacherSumOrderByAggregateInput = {
     id?: SortOrder
     classroomId?: SortOrder
+    teacherId?: SortOrder
   }
 
   export type StudentCreateNestedManyWithoutClassLevelInput = {
@@ -8610,6 +8777,48 @@ export namespace Prisma {
     delete?: EnrollmentWhereInput | boolean
     connect?: EnrollmentWhereUniqueInput
     update?: XOR<XOR<EnrollmentUpdateToOneWithWhereWithoutStudentInput, EnrollmentUpdateWithoutStudentInput>, EnrollmentUncheckedUpdateWithoutStudentInput>
+  }
+
+  export type HomeroomTeacherCreateNestedManyWithoutTeacherInput = {
+    create?: XOR<HomeroomTeacherCreateWithoutTeacherInput, HomeroomTeacherUncheckedCreateWithoutTeacherInput> | HomeroomTeacherCreateWithoutTeacherInput[] | HomeroomTeacherUncheckedCreateWithoutTeacherInput[]
+    connectOrCreate?: HomeroomTeacherCreateOrConnectWithoutTeacherInput | HomeroomTeacherCreateOrConnectWithoutTeacherInput[]
+    createMany?: HomeroomTeacherCreateManyTeacherInputEnvelope
+    connect?: HomeroomTeacherWhereUniqueInput | HomeroomTeacherWhereUniqueInput[]
+  }
+
+  export type HomeroomTeacherUncheckedCreateNestedManyWithoutTeacherInput = {
+    create?: XOR<HomeroomTeacherCreateWithoutTeacherInput, HomeroomTeacherUncheckedCreateWithoutTeacherInput> | HomeroomTeacherCreateWithoutTeacherInput[] | HomeroomTeacherUncheckedCreateWithoutTeacherInput[]
+    connectOrCreate?: HomeroomTeacherCreateOrConnectWithoutTeacherInput | HomeroomTeacherCreateOrConnectWithoutTeacherInput[]
+    createMany?: HomeroomTeacherCreateManyTeacherInputEnvelope
+    connect?: HomeroomTeacherWhereUniqueInput | HomeroomTeacherWhereUniqueInput[]
+  }
+
+  export type HomeroomTeacherUpdateManyWithoutTeacherNestedInput = {
+    create?: XOR<HomeroomTeacherCreateWithoutTeacherInput, HomeroomTeacherUncheckedCreateWithoutTeacherInput> | HomeroomTeacherCreateWithoutTeacherInput[] | HomeroomTeacherUncheckedCreateWithoutTeacherInput[]
+    connectOrCreate?: HomeroomTeacherCreateOrConnectWithoutTeacherInput | HomeroomTeacherCreateOrConnectWithoutTeacherInput[]
+    upsert?: HomeroomTeacherUpsertWithWhereUniqueWithoutTeacherInput | HomeroomTeacherUpsertWithWhereUniqueWithoutTeacherInput[]
+    createMany?: HomeroomTeacherCreateManyTeacherInputEnvelope
+    set?: HomeroomTeacherWhereUniqueInput | HomeroomTeacherWhereUniqueInput[]
+    disconnect?: HomeroomTeacherWhereUniqueInput | HomeroomTeacherWhereUniqueInput[]
+    delete?: HomeroomTeacherWhereUniqueInput | HomeroomTeacherWhereUniqueInput[]
+    connect?: HomeroomTeacherWhereUniqueInput | HomeroomTeacherWhereUniqueInput[]
+    update?: HomeroomTeacherUpdateWithWhereUniqueWithoutTeacherInput | HomeroomTeacherUpdateWithWhereUniqueWithoutTeacherInput[]
+    updateMany?: HomeroomTeacherUpdateManyWithWhereWithoutTeacherInput | HomeroomTeacherUpdateManyWithWhereWithoutTeacherInput[]
+    deleteMany?: HomeroomTeacherScalarWhereInput | HomeroomTeacherScalarWhereInput[]
+  }
+
+  export type HomeroomTeacherUncheckedUpdateManyWithoutTeacherNestedInput = {
+    create?: XOR<HomeroomTeacherCreateWithoutTeacherInput, HomeroomTeacherUncheckedCreateWithoutTeacherInput> | HomeroomTeacherCreateWithoutTeacherInput[] | HomeroomTeacherUncheckedCreateWithoutTeacherInput[]
+    connectOrCreate?: HomeroomTeacherCreateOrConnectWithoutTeacherInput | HomeroomTeacherCreateOrConnectWithoutTeacherInput[]
+    upsert?: HomeroomTeacherUpsertWithWhereUniqueWithoutTeacherInput | HomeroomTeacherUpsertWithWhereUniqueWithoutTeacherInput[]
+    createMany?: HomeroomTeacherCreateManyTeacherInputEnvelope
+    set?: HomeroomTeacherWhereUniqueInput | HomeroomTeacherWhereUniqueInput[]
+    disconnect?: HomeroomTeacherWhereUniqueInput | HomeroomTeacherWhereUniqueInput[]
+    delete?: HomeroomTeacherWhereUniqueInput | HomeroomTeacherWhereUniqueInput[]
+    connect?: HomeroomTeacherWhereUniqueInput | HomeroomTeacherWhereUniqueInput[]
+    update?: HomeroomTeacherUpdateWithWhereUniqueWithoutTeacherInput | HomeroomTeacherUpdateWithWhereUniqueWithoutTeacherInput[]
+    updateMany?: HomeroomTeacherUpdateManyWithWhereWithoutTeacherInput | HomeroomTeacherUpdateManyWithWhereWithoutTeacherInput[]
+    deleteMany?: HomeroomTeacherScalarWhereInput | HomeroomTeacherScalarWhereInput[]
   }
 
   export type EnrollmentCreateNestedManyWithoutClassroomInput = {
@@ -8730,12 +8939,26 @@ export namespace Prisma {
     connect?: ClassroomWhereUniqueInput
   }
 
+  export type TeacherCreateNestedOneWithoutHomeRoomsInput = {
+    create?: XOR<TeacherCreateWithoutHomeRoomsInput, TeacherUncheckedCreateWithoutHomeRoomsInput>
+    connectOrCreate?: TeacherCreateOrConnectWithoutHomeRoomsInput
+    connect?: TeacherWhereUniqueInput
+  }
+
   export type ClassroomUpdateOneRequiredWithoutHomeroomTeachersNestedInput = {
     create?: XOR<ClassroomCreateWithoutHomeroomTeachersInput, ClassroomUncheckedCreateWithoutHomeroomTeachersInput>
     connectOrCreate?: ClassroomCreateOrConnectWithoutHomeroomTeachersInput
     upsert?: ClassroomUpsertWithoutHomeroomTeachersInput
     connect?: ClassroomWhereUniqueInput
     update?: XOR<XOR<ClassroomUpdateToOneWithWhereWithoutHomeroomTeachersInput, ClassroomUpdateWithoutHomeroomTeachersInput>, ClassroomUncheckedUpdateWithoutHomeroomTeachersInput>
+  }
+
+  export type TeacherUpdateOneRequiredWithoutHomeRoomsNestedInput = {
+    create?: XOR<TeacherCreateWithoutHomeRoomsInput, TeacherUncheckedCreateWithoutHomeRoomsInput>
+    connectOrCreate?: TeacherCreateOrConnectWithoutHomeRoomsInput
+    upsert?: TeacherUpsertWithoutHomeRoomsInput
+    connect?: TeacherWhereUniqueInput
+    update?: XOR<XOR<TeacherUpdateToOneWithWhereWithoutHomeRoomsInput, TeacherUpdateWithoutHomeRoomsInput>, TeacherUncheckedUpdateWithoutHomeRoomsInput>
   }
 
   export type NestedIntFilter<$PrismaModel = never> = {
@@ -8982,6 +9205,56 @@ export namespace Prisma {
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
   }
 
+  export type HomeroomTeacherCreateWithoutTeacherInput = {
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    classroom: ClassroomCreateNestedOneWithoutHomeroomTeachersInput
+  }
+
+  export type HomeroomTeacherUncheckedCreateWithoutTeacherInput = {
+    id?: number
+    classroomId: number
+    createdAt?: Date | string
+    updatedAt?: Date | string
+  }
+
+  export type HomeroomTeacherCreateOrConnectWithoutTeacherInput = {
+    where: HomeroomTeacherWhereUniqueInput
+    create: XOR<HomeroomTeacherCreateWithoutTeacherInput, HomeroomTeacherUncheckedCreateWithoutTeacherInput>
+  }
+
+  export type HomeroomTeacherCreateManyTeacherInputEnvelope = {
+    data: HomeroomTeacherCreateManyTeacherInput | HomeroomTeacherCreateManyTeacherInput[]
+    skipDuplicates?: boolean
+  }
+
+  export type HomeroomTeacherUpsertWithWhereUniqueWithoutTeacherInput = {
+    where: HomeroomTeacherWhereUniqueInput
+    update: XOR<HomeroomTeacherUpdateWithoutTeacherInput, HomeroomTeacherUncheckedUpdateWithoutTeacherInput>
+    create: XOR<HomeroomTeacherCreateWithoutTeacherInput, HomeroomTeacherUncheckedCreateWithoutTeacherInput>
+  }
+
+  export type HomeroomTeacherUpdateWithWhereUniqueWithoutTeacherInput = {
+    where: HomeroomTeacherWhereUniqueInput
+    data: XOR<HomeroomTeacherUpdateWithoutTeacherInput, HomeroomTeacherUncheckedUpdateWithoutTeacherInput>
+  }
+
+  export type HomeroomTeacherUpdateManyWithWhereWithoutTeacherInput = {
+    where: HomeroomTeacherScalarWhereInput
+    data: XOR<HomeroomTeacherUpdateManyMutationInput, HomeroomTeacherUncheckedUpdateManyWithoutTeacherInput>
+  }
+
+  export type HomeroomTeacherScalarWhereInput = {
+    AND?: HomeroomTeacherScalarWhereInput | HomeroomTeacherScalarWhereInput[]
+    OR?: HomeroomTeacherScalarWhereInput[]
+    NOT?: HomeroomTeacherScalarWhereInput | HomeroomTeacherScalarWhereInput[]
+    id?: IntFilter<"HomeroomTeacher"> | number
+    classroomId?: IntFilter<"HomeroomTeacher"> | number
+    teacherId?: IntFilter<"HomeroomTeacher"> | number
+    createdAt?: DateTimeFilter<"HomeroomTeacher"> | Date | string
+    updatedAt?: DateTimeFilter<"HomeroomTeacher"> | Date | string
+  }
+
   export type EnrollmentCreateWithoutClassroomInput = {
     createdAt?: Date | string
     updatedAt?: Date | string
@@ -9008,10 +9281,12 @@ export namespace Prisma {
   export type HomeroomTeacherCreateWithoutClassroomInput = {
     createdAt?: Date | string
     updatedAt?: Date | string
+    teacher: TeacherCreateNestedOneWithoutHomeRoomsInput
   }
 
   export type HomeroomTeacherUncheckedCreateWithoutClassroomInput = {
     id?: number
+    teacherId: number
     createdAt?: Date | string
     updatedAt?: Date | string
   }
@@ -9067,16 +9342,6 @@ export namespace Prisma {
   export type HomeroomTeacherUpdateManyWithWhereWithoutClassroomInput = {
     where: HomeroomTeacherScalarWhereInput
     data: XOR<HomeroomTeacherUpdateManyMutationInput, HomeroomTeacherUncheckedUpdateManyWithoutClassroomInput>
-  }
-
-  export type HomeroomTeacherScalarWhereInput = {
-    AND?: HomeroomTeacherScalarWhereInput | HomeroomTeacherScalarWhereInput[]
-    OR?: HomeroomTeacherScalarWhereInput[]
-    NOT?: HomeroomTeacherScalarWhereInput | HomeroomTeacherScalarWhereInput[]
-    id?: IntFilter<"HomeroomTeacher"> | number
-    classroomId?: IntFilter<"HomeroomTeacher"> | number
-    createdAt?: DateTimeFilter<"HomeroomTeacher"> | Date | string
-    updatedAt?: DateTimeFilter<"HomeroomTeacher"> | Date | string
   }
 
   export type ClassroomCreateWithoutEnrollmentsInput = {
@@ -9219,6 +9484,28 @@ export namespace Prisma {
     create: XOR<ClassroomCreateWithoutHomeroomTeachersInput, ClassroomUncheckedCreateWithoutHomeroomTeachersInput>
   }
 
+  export type TeacherCreateWithoutHomeRoomsInput = {
+    firstName: string
+    lastName: string
+    email: string
+    createdAt?: Date | string
+    updatedAt?: Date | string
+  }
+
+  export type TeacherUncheckedCreateWithoutHomeRoomsInput = {
+    id?: number
+    firstName: string
+    lastName: string
+    email: string
+    createdAt?: Date | string
+    updatedAt?: Date | string
+  }
+
+  export type TeacherCreateOrConnectWithoutHomeRoomsInput = {
+    where: TeacherWhereUniqueInput
+    create: XOR<TeacherCreateWithoutHomeRoomsInput, TeacherUncheckedCreateWithoutHomeRoomsInput>
+  }
+
   export type ClassroomUpsertWithoutHomeroomTeachersInput = {
     update: XOR<ClassroomUpdateWithoutHomeroomTeachersInput, ClassroomUncheckedUpdateWithoutHomeroomTeachersInput>
     create: XOR<ClassroomCreateWithoutHomeroomTeachersInput, ClassroomUncheckedCreateWithoutHomeroomTeachersInput>
@@ -9247,6 +9534,34 @@ export namespace Prisma {
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     enrollments?: EnrollmentUncheckedUpdateManyWithoutClassroomNestedInput
+  }
+
+  export type TeacherUpsertWithoutHomeRoomsInput = {
+    update: XOR<TeacherUpdateWithoutHomeRoomsInput, TeacherUncheckedUpdateWithoutHomeRoomsInput>
+    create: XOR<TeacherCreateWithoutHomeRoomsInput, TeacherUncheckedCreateWithoutHomeRoomsInput>
+    where?: TeacherWhereInput
+  }
+
+  export type TeacherUpdateToOneWithWhereWithoutHomeRoomsInput = {
+    where?: TeacherWhereInput
+    data: XOR<TeacherUpdateWithoutHomeRoomsInput, TeacherUncheckedUpdateWithoutHomeRoomsInput>
+  }
+
+  export type TeacherUpdateWithoutHomeRoomsInput = {
+    firstName?: StringFieldUpdateOperationsInput | string
+    lastName?: StringFieldUpdateOperationsInput | string
+    email?: StringFieldUpdateOperationsInput | string
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type TeacherUncheckedUpdateWithoutHomeRoomsInput = {
+    id?: IntFieldUpdateOperationsInput | number
+    firstName?: StringFieldUpdateOperationsInput | string
+    lastName?: StringFieldUpdateOperationsInput | string
+    email?: StringFieldUpdateOperationsInput | string
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
   }
 
   export type StudentCreateManyClassLevelInput = {
@@ -9294,6 +9609,33 @@ export namespace Prisma {
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
   }
 
+  export type HomeroomTeacherCreateManyTeacherInput = {
+    id?: number
+    classroomId: number
+    createdAt?: Date | string
+    updatedAt?: Date | string
+  }
+
+  export type HomeroomTeacherUpdateWithoutTeacherInput = {
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    classroom?: ClassroomUpdateOneRequiredWithoutHomeroomTeachersNestedInput
+  }
+
+  export type HomeroomTeacherUncheckedUpdateWithoutTeacherInput = {
+    id?: IntFieldUpdateOperationsInput | number
+    classroomId?: IntFieldUpdateOperationsInput | number
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type HomeroomTeacherUncheckedUpdateManyWithoutTeacherInput = {
+    id?: IntFieldUpdateOperationsInput | number
+    classroomId?: IntFieldUpdateOperationsInput | number
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
   export type EnrollmentCreateManyClassroomInput = {
     id?: number
     studentId: number
@@ -9303,6 +9645,7 @@ export namespace Prisma {
 
   export type HomeroomTeacherCreateManyClassroomInput = {
     id?: number
+    teacherId: number
     createdAt?: Date | string
     updatedAt?: Date | string
   }
@@ -9330,16 +9673,19 @@ export namespace Prisma {
   export type HomeroomTeacherUpdateWithoutClassroomInput = {
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    teacher?: TeacherUpdateOneRequiredWithoutHomeRoomsNestedInput
   }
 
   export type HomeroomTeacherUncheckedUpdateWithoutClassroomInput = {
     id?: IntFieldUpdateOperationsInput | number
+    teacherId?: IntFieldUpdateOperationsInput | number
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
   }
 
   export type HomeroomTeacherUncheckedUpdateManyWithoutClassroomInput = {
     id?: IntFieldUpdateOperationsInput | number
+    teacherId?: IntFieldUpdateOperationsInput | number
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
   }
