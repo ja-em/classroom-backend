@@ -1,14 +1,17 @@
-import { Field, GraphQLISODateTime } from '@nestjs/graphql';
-import { Prisma } from 'prisma/client';
+import { Field, GraphQLISODateTime, ObjectType } from '@nestjs/graphql';
+import { Prisma } from '@prisma/client';
 import { ClassLevelObject } from './class-level.object';
 import { EnrollmentObject } from './enrollment.object';
 
+@ObjectType()
 export class StudentObject
   implements
     Prisma.StudentGetPayload<{
       include: { classLevel: true; enrollment: true };
     }>
 {
+  @Field(() => String)
+  identificationNumber: string;
   @Field(() => Number)
   id: number;
   @Field(() => String)

@@ -6,7 +6,7 @@
 
 generator client {
   provider = "prisma-client-js"
-  output   = "./client"
+  // output   = "./client"
 }
 
 datasource db {
@@ -24,15 +24,16 @@ model ClassLevel {
 }
 
 model Student {
-  id           Int         @id @default(autoincrement())
-  prefix       String
-  firstName    String
-  lastName     String
-  gender       String
-  birthDate    DateTime
-  classLevelId Int
-  classLevel   ClassLevel  @relation(fields: [classLevelId], references: [id])
-  enrollment   Enrollment?
+  id                   Int         @id @default(autoincrement())
+  prefix               String
+  firstName            String
+  lastName             String
+  gender               String
+  birthDate            DateTime
+  classLevelId         Int
+  identificationNumber String
+  classLevel           ClassLevel  @relation(fields: [classLevelId], references: [id])
+  enrollment           Enrollment?
 
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt

@@ -4,11 +4,16 @@ import { GraphQLModule } from '@nestjs/graphql';
 import { StudentModule } from './student/student.module';
 import { AuthenticationModule } from './authentication/authentication.module';
 import { ConfigModule } from '@nestjs/config';
+import { PrismaModule } from 'prisma/prisma.module';
 
 @Global()
 @Module({
-  imports: [AuthenticationModule, ConfigModule.forRoot({ isGlobal: true })],
-  exports: [AuthenticationModule],
+  imports: [
+    AuthenticationModule,
+    ConfigModule.forRoot({ isGlobal: true }),
+    PrismaModule,
+  ],
+  exports: [AuthenticationModule, PrismaModule],
 })
 class GlobalModule {}
 

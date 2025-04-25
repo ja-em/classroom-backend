@@ -1,6 +1,7 @@
-import { Field, GraphQLISODateTime } from '@nestjs/graphql';
-import { ClassLevel } from 'prisma/client';
+import { Field, GraphQLISODateTime, ObjectType } from '@nestjs/graphql';
+import { ClassLevel } from '@prisma/client';
 
+@ObjectType()
 export class ClassLevelObject implements ClassLevel {
   @Field(() => Number)
   id: number;

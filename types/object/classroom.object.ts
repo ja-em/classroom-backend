@@ -1,8 +1,9 @@
-import { Prisma } from 'prisma/client';
+import { Prisma } from '@prisma/client';
 import { HomeroomTeacherObject } from './homeroom-teacher.object';
-import { Field, GraphQLISODateTime } from '@nestjs/graphql';
+import { Field, GraphQLISODateTime, ObjectType } from '@nestjs/graphql';
 import { EnrollmentObject } from './enrollment.object';
 
+@ObjectType()
 export class ClassroomObject
   implements
     Prisma.ClassroomGetPayload<{
