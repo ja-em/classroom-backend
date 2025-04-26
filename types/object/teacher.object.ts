@@ -1,22 +1,8 @@
 import { Field, GraphQLISODateTime, ObjectType } from '@nestjs/graphql';
-import { Prisma } from '@prisma/client';
+import { Teacher } from '@prisma/client';
 
 @ObjectType()
-export class TeacherObject
-  implements
-    Prisma.TeacherGetPayload<{
-      include: {
-        homeRooms: true;
-      };
-    }>
-{
-  homeRooms: {
-    id: number;
-    createdAt: Date;
-    updatedAt: Date;
-    classroomId: number;
-    teacherId: number;
-  }[];
+export class TeacherObject implements Teacher {
   @Field(() => Number)
   id: number;
   @Field(() => String)

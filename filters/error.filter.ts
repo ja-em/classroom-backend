@@ -6,9 +6,7 @@ import { GraphQLError } from 'graphql';
 export class ErrorExceptionFilter implements GqlExceptionFilter {
   private readonly logger = new Logger(ErrorExceptionFilter.name);
 
-  catch(exception: any, host: ArgumentsHost) {
-    this.logger.error('GraphQL Exception', exception);
-
+  static toErrorResponse(exception: any) {
     let message = 'Internal server error';
     let statusCode = 500;
 
@@ -32,5 +30,10 @@ export class ErrorExceptionFilter implements GqlExceptionFilter {
         message,
       },
     });
+  }
+
+  catch(exception: any, host: ArgumentsHost) {
+    this.logger.error('GraphQL Exception', exception);
+    return ErrorExceptionFilter.toErrorResponse(exception);
   }
 }
