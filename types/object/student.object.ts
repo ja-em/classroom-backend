@@ -2,6 +2,7 @@ import { Field, GraphQLISODateTime, ObjectType } from '@nestjs/graphql';
 import { Prisma } from '@prisma/client';
 import { ClassLevelObject } from './class-level.object';
 import { EnrollmentObject } from './enrollment.object';
+import { PaginatedResponse } from './pagination.object';
 
 @ObjectType()
 export class StudentObject
@@ -35,3 +36,6 @@ export class StudentObject
   @Field(() => EnrollmentObject, { nullable: true })
   enrollment: EnrollmentObject;
 }
+
+@ObjectType()
+export class StudentPaginationObject extends PaginatedResponse(StudentObject) {}

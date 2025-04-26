@@ -1,5 +1,7 @@
 import { Injectable, NotFoundException } from '@nestjs/common';
+import { Prisma } from '@prisma/client';
 import { PrismaService } from 'prisma/prisma.service';
+import { GetAllStudentInput } from 'types/input';
 
 @Injectable()
 export class StudentService {
@@ -19,5 +21,51 @@ export class StudentService {
       throw new NotFoundException(`Student with ID ${id} not found`);
     }
     return find;
+  }
+
+  async getAll(args?: GetAllStudentInput) {
+    const keyword = args?.keyword;
+    const whereKeyword: Prisma.StudentWhereInput = {
+      OR: [
+        {
+          identificationNumber: {
+            contains: keyword,
+          },
+        },
+        {
+          firstName: {
+            contains: keyword,
+          },
+        },
+        {
+          lastName: {
+            contains: keyword,
+          },
+        },
+      ],
+    };
+    const allWhere: Prisma.StudentWhereInput = {
+      ...(keyword && whereKeyword),
+      ...(args?.classLevelId && {
+        classLevelId: args.classLevelId,
+      }),
+    };
+    const [find, count] = await Promise.all([
+      this._prismaService.student.findMany({
+        where: allWhere,
+        skip: this._prismaService.getSkip(args?.page, args?.limit),
+        take: this._prismaService.getLimit(args?.limit),
+        orderBy: {
+          createdAt: 'desc',
+        },
+      }),
+      this._prismaService.student.count({
+        where: allWhere,
+      }),
+    ]);
+    return this._prismaService.toPaginationResponse(find, {
+      ...args,
+      totalItem: count,
+    });
   }
 }

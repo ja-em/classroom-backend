@@ -1,17 +1,22 @@
 import { UseGuards } from '@nestjs/common';
 import { Resolver, Query, Args, Parent } from '@nestjs/graphql';
-import { AuthGuard } from 'guard/auth.guard';
-import { StudentObject } from 'types/object';
+import { AuthGuard } from 'guards/auth.guard';
+import { StudentObject, StudentPaginationObject } from 'types/object';
 import { StudentService } from './studen.service';
+import { GetAllStudentInput } from 'types/input';
 
 @UseGuards(AuthGuard) // Apply the AuthGuard to this resolver
 @Resolver(() => StudentObject)
 export class StudentResover {
   constructor(private readonly _studentService: StudentService) {}
-  // Define your resolver methods here
-  // For example, a simple query that returns a string
+
   @Query(() => StudentObject)
   getStudentById(@Args('id') id: number) {
     return this._studentService.getById(id);
+  }
+
+  @Query(() => StudentPaginationObject)
+  getStudent(@Args('input', { nullable: true }) args?: GetAllStudentInput) {
+    return this._studentService.getAll(args);
   }
 }
