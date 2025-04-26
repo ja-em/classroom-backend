@@ -7,7 +7,7 @@ import {
 import { PrismaClient } from '@prisma/client';
 import { PaginationInput } from 'types/input';
 import { IPaginationResponse } from 'types/interface';
-import { PaginatedResponse } from 'types/object';
+import { PaginationResponse } from 'types/object';
 
 @Injectable()
 export class PrismaService

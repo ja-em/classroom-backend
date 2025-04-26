@@ -2,6 +2,7 @@ import { Prisma } from '@prisma/client';
 import { HomeroomTeacherObject } from './homeroom-teacher.object';
 import { Field, GraphQLISODateTime, ObjectType } from '@nestjs/graphql';
 import { EnrollmentObject } from './enrollment.object';
+import { PaginationResponse } from './pagination.object';
 
 @ObjectType()
 export class ClassroomObject
@@ -27,3 +28,8 @@ export class ClassroomObject
   @Field(() => [HomeroomTeacherObject])
   homeroomTeachers: HomeroomTeacherObject[];
 }
+
+@ObjectType()
+export class ClassroomPaginationObject extends PaginationResponse(
+  ClassroomObject,
+) {}

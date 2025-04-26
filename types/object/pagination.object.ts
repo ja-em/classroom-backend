@@ -1,7 +1,7 @@
 import { Field, ObjectType } from '@nestjs/graphql';
 import { IPaginationResponse } from 'types/interface';
 
-export function PaginatedResponse<TItem>(TItemClass: new () => TItem) {
+export function PaginationResponse<TItem>(TItemClass: new () => TItem) {
   @ObjectType({ isAbstract: true })
   abstract class PaginatedResponseClass implements IPaginationResponse<TItem> {
     @Field(() => [TItemClass])
