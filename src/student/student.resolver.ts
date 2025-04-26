@@ -1,12 +1,11 @@
 import { UseGuards } from '@nestjs/common';
-import { Resolver, Query, Args, Parent } from '@nestjs/graphql';
+import { Query, Args } from '@nestjs/graphql';
 import { AuthGuard } from 'guards/auth.guard';
 import { StudentObject, StudentPaginationObject } from 'types/object';
 import { StudentService } from './studen.service';
 import { GetAllStudentInput } from 'types/input';
 
-@UseGuards(AuthGuard) // Apply the AuthGuard to this resolver
-@Resolver(() => StudentObject)
+@UseGuards(AuthGuard)
 export class StudentResover {
   constructor(private readonly _studentService: StudentService) {}
 

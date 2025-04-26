@@ -8,6 +8,8 @@ import { PrismaModule } from 'prisma/prisma.module';
 import { ClassroomModule } from './classroom/classroom.module';
 import { TeacherModule } from './teacher/teacher.module';
 import { ErrorExceptionFilter } from 'filters/error.filter';
+import { APP_GUARD } from '@nestjs/core';
+import { AuthGuard } from 'guards/auth.guard';
 
 @Global()
 @Module({
@@ -38,6 +40,12 @@ class GlobalModule {}
     }),
     GlobalModule,
     StudentModule,
+  ],
+  providers: [
+    {
+      provide: APP_GUARD,
+      useClass: AuthGuard,
+    },
   ],
 })
 export class AppModule {}
