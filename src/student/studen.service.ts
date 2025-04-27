@@ -1,7 +1,12 @@
 import { Injectable, NotFoundException } from '@nestjs/common';
 import { Prisma } from '@prisma/client';
+import { GraphQLError } from 'graphql';
 import { PrismaService } from 'prisma/prisma.service';
-import { GetAllStudentInput } from 'types/input';
+import {
+  CreateStudentInput,
+  GetAllStudentInput,
+  UpdateStudentInput,
+} from 'types/input';
 
 @Injectable()
 export class StudentService {
@@ -18,7 +23,7 @@ export class StudentService {
       },
     });
     if (!find) {
-      throw new NotFoundException(`Student with ID ${id} not found`);
+      throw new GraphQLError(`Student with ID ${id} not found`);
     }
     return find;
   }
@@ -56,7 +61,10 @@ export class StudentService {
         skip: this._prismaService.getSkip(args?.page, args?.limit),
         take: this._prismaService.getLimit(args?.limit),
         orderBy: {
-          createdAt: 'desc',
+          id: 'desc',
+        },
+        include: {
+          classLevel: true,
         },
       }),
       this._prismaService.student.count({
@@ -67,5 +75,37 @@ export class StudentService {
       ...args,
       totalItem: count,
     });
+  }
+
+  async getClassLevel() {
+    const find = await this._prismaService.classLevel.findMany();
+    return find;
+  }
+
+  async create(args: CreateStudentInput) {
+    const data = await this._prismaService.student.create({
+      data: args,
+    });
+    return data;
+  }
+
+  async delete(id: number) {
+    await this.getById(id);
+    await this._prismaService.student.delete({
+      where: { id },
+    });
+
+    return 'OK';
+  }
+
+  async update(id: number, args: UpdateStudentInput) {
+    const find = await this.getById(id);
+    const data = await this._prismaService.student.update({
+      where: {
+        id: find.id,
+      },
+      data: args,
+    });
+    return data;
   }
 }

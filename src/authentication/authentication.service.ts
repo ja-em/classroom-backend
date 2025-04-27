@@ -23,9 +23,11 @@ export class AuthenticationService {
     username: string,
     password: string,
   ): { accessToken: string; refreshToken: string } {
-    if (username !== 'admin' && password !== 'password') {
+    const isValid = username === 'admin' && password === 'password';
+    if (!isValid) {
       throw new BadRequestException('Invalid credentials');
     }
+
     return {
       accessToken: this._generateAccessToken(username),
       refreshToken: this._generateRefreshToken(username),
@@ -36,6 +38,8 @@ export class AuthenticationService {
     accessToken: string;
     refreshToken: string;
   } {
+    console.log('RR');
+
     try {
       const data = jwt.verify(refreshToken, this._refreshTokenSecret) as {
         username: string;
